@@ -1,0 +1,30 @@
+package Midterm_semester2;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.Statement;
+
+public class jdbc {
+    Connection con;
+    Statement stmt;
+    PreparedStatement ps;
+
+    public jdbc(){
+        try {
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/TestingDB",
+                    "keobunhai", "bunhai123");
+            System.out.println("Connection Success!!!");
+            String create = "CREATE TABLE product(id int,string name,price_per_unit double,active_for_sell boolen)";
+            Statement stmt = con.createStatement();
+            stmt.execute(create);
+
+            String insertrecord = "INSERT INTO product(id, name,price_per_unit,active_for_sell) VALUES(1,'coke','2','1')";
+            Statement stmt2 = con.createStatement();
+            stmt2.executeUpdate(insertrecord);
+
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+}
